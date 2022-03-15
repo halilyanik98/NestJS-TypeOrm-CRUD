@@ -5,11 +5,11 @@ export class CreateTaskDto {
     firstName:string;
     lastName:string;
     age:number;
-    //Pipo Kullanılmıştır
+    //Pipe Kullanılmıştır
 
     @IsEmail()
     mail:string;
-    //Pipo Kullanılmıştır
+    //Pipe Kullanılmıştır
     
     @IsNotEmpty()
     password:string;
