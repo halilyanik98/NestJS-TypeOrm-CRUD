@@ -26,6 +26,18 @@ __decorate([
     __metadata("design:type", String)
 ], Task.prototype, "lastName", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Task.prototype, "age", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Task.prototype, "mail", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Task.prototype, "password", void 0);
+__decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", String)
 ], Task.prototype, "newTask", void 0);

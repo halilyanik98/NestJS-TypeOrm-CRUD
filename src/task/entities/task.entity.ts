@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+
 @Entity()
 export class Task {
   @PrimaryGeneratedColumn()
@@ -10,6 +11,15 @@ export class Task {
 
   @Column()
   lastName: string;
+
+  @Column()
+  age:number;
+
+  @Column()
+  mail:string;
+
+  @Column()
+  password:string;
 
   @Column({ default: true })
   newTask: string;

@@ -5,9 +5,6 @@ import { Repository } from 'typeorm';
 import { Task } from './entities/task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
-
-
-
 @Injectable()
 export class TaskService {
 
@@ -16,21 +13,17 @@ export class TaskService {
     private taskRepository: Repository<Task>,
   ) {}
 
-
   findAll(): Promise<Task[]> {
     return this.taskRepository.find();
   }
 
-  findOne(id: string): Promise<Task> {
+  findOne(id: number): Promise<Task> {
     return this.taskRepository.findOne(id);
   }
   
   create(createTaskDto: CreateTaskDto) {
     return this.taskRepository.save(createTaskDto);
   }
-
-
- 
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
     return this.taskRepository.update(+id,updateTaskDto);

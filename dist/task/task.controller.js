@@ -17,9 +17,13 @@ const common_1 = require("@nestjs/common");
 const task_service_1 = require("./task.service");
 const create_task_dto_1 = require("./dto/create-task.dto");
 const update_task_dto_1 = require("./dto/update-task.dto");
+const roles_guard_1 = require("../roles.guard");
 let TaskController = class TaskController {
     constructor(taskService) {
         this.taskService = taskService;
+    }
+    async find() {
+        throw new common_1.ForbiddenException();
     }
     findAll() {
         return this.taskService.findAll();
@@ -38,6 +42,13 @@ let TaskController = class TaskController {
     }
 };
 __decorate([
+    (0, common_1.Get)('exception'),
+    (0, common_1.Get)('exceptions'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TaskController.prototype, "find", null);
+__decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -45,9 +56,9 @@ __decorate([
 ], TaskController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], TaskController.prototype, "findOne", null);
 __decorate([
@@ -74,6 +85,7 @@ __decorate([
 ], TaskController.prototype, "remove", null);
 TaskController = __decorate([
     (0, common_1.Controller)('task'),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
     __metadata("design:paramtypes", [task_service_1.TaskService])
 ], TaskController);
 exports.TaskController = TaskController;
