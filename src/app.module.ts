@@ -15,8 +15,6 @@ import { getConnectionOptions } from 'typeorm';
   }),TaskModule],
 
 
-
-
   controllers: [TaskController],
   providers: [TaskService],
 })
