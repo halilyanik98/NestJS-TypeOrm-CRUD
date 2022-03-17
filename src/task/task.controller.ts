@@ -3,7 +3,6 @@ import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { RolesGuard } from 'src/roles.guard';
-import { async } from 'rxjs';
 
 @Controller('task')
 @UseGuards(RolesGuard)
@@ -11,17 +10,6 @@ import { async } from 'rxjs';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-
-  //Tüm yanıt gövdesini geçersiz kılar
-  @Get('exception')
-  /*
-  async exception() {
-    throw new HttpException({
-      status: HttpStatus.FORBIDDEN,
-      error: 'Birşeyler ters gitti',
-    }, HttpStatus.FORBIDDEN);
-  }
-  */
  @Get('exceptions')
     async find(){
     throw new ForbiddenException();

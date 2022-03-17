@@ -6,7 +6,7 @@
   "password": "",
   "database": "halilyanik",
   "entities": [
-    "dist/**/*.entity{.ts,.js}"
+    "src/task/*.entity{.ts,.js}"
   ],
   "synchronize": true
 }

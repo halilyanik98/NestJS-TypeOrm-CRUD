@@ -5,6 +5,8 @@ import { TaskService } from './task/task.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 
+import {JwtModule, JwtService} from "@nestjs/jwt";
+
 
 @Module({
   imports: [TypeOrmModule.forRootAsync({
@@ -14,8 +16,10 @@ import { getConnectionOptions } from 'typeorm';
       }),
   }),TaskModule],
 
-
+ // imports: [AuthModule, UsersModule],
   controllers: [TaskController],
   providers: [TaskService],
 })
 export class AppModule {}
+
+

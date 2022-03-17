@@ -14,9 +14,9 @@ const class_validator_1 = require("class-validator");
 class CreateTaskDto {
 }
 __decorate([
-    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateTaskDto.prototype, "mail", void 0);
+], CreateTaskDto.prototype, "username", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)

@@ -42,7 +42,6 @@ let TaskController = class TaskController {
     }
 };
 __decorate([
-    (0, common_1.Get)('exception'),
     (0, common_1.Get)('exceptions'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
