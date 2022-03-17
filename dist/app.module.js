@@ -13,6 +13,12 @@ const task_module_1 = require("./task/task.module");
 const task_service_1 = require("./task/task.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const jwt_1 = require("@nestjs/jwt");
+const auth_module_1 = require("./login/auth/auth.module");
+const users_module_1 = require("./login/users/users.module");
+const auth_service_1 = require("./login/auth/auth.service");
+const users_service_1 = require("./login/users/users.service");
+const login_controller_1 = require("./login/login.controller");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -21,9 +27,9 @@ AppModule = __decorate([
                 useFactory: async () => Object.assign(await (0, typeorm_2.getConnectionOptions)(), {
                     autoLoadEntities: true,
                 }),
-            }), task_module_1.TaskModule],
-        controllers: [task_controller_1.TaskController],
-        providers: [task_service_1.TaskService],
+            }), task_module_1.TaskModule, auth_module_1.AuthModule, users_module_1.UsersModule],
+        controllers: [task_controller_1.TaskController, login_controller_1.LoginController],
+        providers: [task_service_1.TaskService, auth_service_1.AuthService, users_service_1.UsersService, jwt_1.JwtService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

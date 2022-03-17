@@ -9,15 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
-const typeorm_1 = require("@nestjs/typeorm");
-const task_entity_1 = require("../../task/entities/task.entity");
-const task_controller_1 = require("../../task/task.controller");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([task_entity_1.Task])],
-        controllers: [task_controller_1.TaskController],
         providers: [users_service_1.UsersService],
         exports: [users_service_1.UsersService]
     })
