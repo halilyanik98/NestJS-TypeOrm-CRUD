@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -24,13 +27,19 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
+const typeorm_1 = require("@nestjs/typeorm");
+const task_entity_1 = require("../entities/task.entity");
+const typeorm_2 = require("typeorm");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
+    constructor(usersService, jwtService, taskRepository) {
         this.usersService = usersService;
         this.jwtService = jwtService;
+        this.taskRepository = taskRepository;
     }
     async validateUser(username, pass) {
-        const user = await this.usersService.findOne(username);
+        console.log('auth.service1');
+        const user = await this.taskRepository.findOne(username);
+        console.log('auth.service2');
         if (user && user.password === pass) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
@@ -38,6 +47,7 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
+        console.log("logindesin");
         const payload = { username: user.username, sub: user.userId };
         return {
             access_token: this.jwtService.sign(payload),
@@ -46,8 +56,10 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
+    __param(2, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
     __metadata("design:paramtypes", [users_service_1.UsersService,
-        jwt_1.JwtService])
+        jwt_1.JwtService,
+        typeorm_2.Repository])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

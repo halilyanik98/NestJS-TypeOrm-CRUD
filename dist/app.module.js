@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const task_controller_1 = require("./task/task.controller");
 const task_module_1 = require("./task/task.module");
 const task_service_1 = require("./task/task.service");
 const typeorm_1 = require("@nestjs/typeorm");
@@ -25,7 +24,7 @@ AppModule = __decorate([
                     autoLoadEntities: true,
                 }),
             }), task_module_1.TaskModule, auth_module_1.AuthModule, users_module_1.UsersModule],
-        controllers: [task_controller_1.TaskController, login_controller_1.LoginController],
+        controllers: [login_controller_1.LoginController],
         providers: [task_service_1.TaskService],
     })
 ], AppModule);

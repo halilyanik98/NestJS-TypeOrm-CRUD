@@ -15,7 +15,7 @@ import {Task} from "../../task/entities/task.entity";
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
-            signOptions: { expiresIn: '600s' },
+            signOptions: { expiresIn: '60s' },
         }),
     ],
     providers: [AuthService, LocalStrategy, JwtStrategy],
