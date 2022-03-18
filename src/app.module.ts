@@ -4,7 +4,6 @@ import { TaskModule } from './task/task.module';
 import { TaskService } from './task/task.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
-
 import {JwtModule, JwtService} from "@nestjs/jwt";
 import {AuthModule} from "./login/auth/auth.module";
 import {UsersModule} from "./login/users/users.module";
@@ -23,7 +22,7 @@ import {LoginController} from "./login/login.controller";
 
  // imports: [AuthModule, UsersModule],
   controllers: [TaskController,LoginController],
-  providers: [TaskService,AuthService,UsersService,JwtService],
+  providers: [TaskService],
 })
 export class AppModule {}
 
