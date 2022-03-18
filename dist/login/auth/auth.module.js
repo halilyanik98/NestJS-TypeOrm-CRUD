@@ -15,11 +15,13 @@ const users_module_1 = require("../users/users.module");
 const passport_1 = require("@nestjs/passport");
 const jwt_1 = require("@nestjs/jwt");
 const constants_1 = require("./constants");
+const typeorm_1 = require("@nestjs/typeorm");
+const task_entity_1 = require("../../task/entities/task.entity");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [
+        imports: [typeorm_1.TypeOrmModule.forFeature([task_entity_1.Task]),
             users_module_1.UsersModule,
             passport_1.PassportModule,
             jwt_1.JwtModule.register({

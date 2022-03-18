@@ -6,9 +6,11 @@ import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import {JwtModule, JwtService} from '@nestjs/jwt';
 import { jwtConstants } from './constants';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Task} from "../../task/entities/task.entity";
 
 @Module({
-    imports: [
+    imports: [TypeOrmModule.forFeature([Task]),
         UsersModule,
         PassportModule,
         JwtModule.register({
