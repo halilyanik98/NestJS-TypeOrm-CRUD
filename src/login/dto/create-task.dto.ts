@@ -10,4 +10,5 @@ export class CreateTaskDto {
     @IsNotEmpty()
     password:string;
     newTask:string;
+
 }

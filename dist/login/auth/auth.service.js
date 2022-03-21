@@ -36,22 +36,36 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
         this.taskRepository = taskRepository;
     }
-    async validateUser(username, pass) {
-        console.log('auth.service1');
+    async validateUser(username, passt) {
+        console.log('validateUser');
         const user = await this.taskRepository.findOne(username);
-        console.log('auth.service2');
-        if (user && user.password === pass) {
+        if (user && user.password === passt) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
         }
         return null;
     }
     async login(user) {
-        console.log("logindesin");
-        const payload = { username: user.username, sub: user.userId };
+        console.log("Login");
+        const payload = { userId: user.userId, username: user.username, password: user.password, newTask: user.newTask };
         return {
-            access_token: this.jwtService.sign(payload),
+            access_token: this.jwtService.sign(payload)
         };
+    }
+    findAll() {
+        return this.taskRepository.find();
+    }
+    findOne(id) {
+        return this.taskRepository.findOne(id);
+    }
+    create(createTaskDto) {
+        return this.taskRepository.save(createTaskDto);
+    }
+    update(id, updateTaskDto) {
+        return this.taskRepository.update(+id, updateTaskDto);
+    }
+    remove(id) {
+        return this.taskRepository.delete(id);
     }
 };
 AuthService = __decorate([
