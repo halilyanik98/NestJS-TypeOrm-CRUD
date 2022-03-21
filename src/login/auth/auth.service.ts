@@ -17,7 +17,7 @@ export class AuthService {
     ) {}
 //Doğrulama yapılmaktadır -------------------------------01
     async validateUser(username: string, passt: string): Promise<any> {
-        console.log('validateUser');
+        console.log('auth.service-validateUser');
         const user = await this.taskRepository.findOne(username);
         if (user && user.password === passt) {
             const { password, ...result } = user;
@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     async login(user: any) {
-        console.log("Login");
+        console.log("auth.service-login");
         const payload = { userId: user.userId,username: user.username , password: user.password, newTask: user.newTask };
         return {
             access_token: this.jwtService.sign(payload)

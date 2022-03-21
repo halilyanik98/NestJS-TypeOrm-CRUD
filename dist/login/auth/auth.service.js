@@ -37,7 +37,7 @@ let AuthService = class AuthService {
         this.taskRepository = taskRepository;
     }
     async validateUser(username, passt) {
-        console.log('validateUser');
+        console.log('auth.service-validateUser');
         const user = await this.taskRepository.findOne(username);
         if (user && user.password === passt) {
             const { password } = user, result = __rest(user, ["password"]);
@@ -46,7 +46,7 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
-        console.log("Login");
+        console.log("auth.service-login");
         const payload = { userId: user.userId, username: user.username, password: user.password, newTask: user.newTask };
         return {
             access_token: this.jwtService.sign(payload)

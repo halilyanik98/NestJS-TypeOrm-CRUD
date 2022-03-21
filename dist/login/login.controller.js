@@ -17,19 +17,39 @@ const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
 const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
+const create_task_dto_1 = require("../task/dto/create-task.dto");
+const update_task_dto_1 = require("../task/dto/update-task.dto");
 let LoginController = class LoginController {
     constructor(authService) {
         this.authService = authService;
     }
     async login(req) {
+        console.log('login.controller-Post');
         return this.authService.login(req.user);
     }
     getProfile(req) {
+        console.log('login.controller-profileGet');
         return req.user;
     }
-    deneme(id) {
-        console.log("sadasasdasd");
-        return "dasdasdasd";
+    findAll() {
+        console.log('FindAll');
+        return this.authService.findAll();
+    }
+    findOne(id) {
+        console.log('FindAll İD');
+        return this.authService.findOne(id);
+    }
+    create(createTaskDto) {
+        console.log('Create');
+        return this.authService.create(createTaskDto);
+    }
+    update(id, updateTaskDto) {
+        console.log('Update');
+        return this.authService.update(+id, updateTaskDto);
+    }
+    remove(id) {
+        console.log('Delete');
+        return this.authService.remove(+id);
     }
 };
 __decorate([
@@ -50,12 +70,43 @@ __decorate([
 ], LoginController.prototype, "getProfile", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Post)('deneme'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], LoginController.prototype, "deneme", null);
+], LoginController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_task_dto_1.CreateTaskDto]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "create", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_task_dto_1.UpdateTaskDto]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "update", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "remove", null);
 LoginController = __decorate([
     (0, common_1.Controller)('login'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
