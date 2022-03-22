@@ -9,28 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Task = void 0;
+exports.TaskOnly = void 0;
 const typeorm_1 = require("typeorm");
-let Task = class Task {
+let TaskOnly = class TaskOnly {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Task.prototype, "userId", void 0);
+], TaskOnly.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Task.prototype, "username", void 0);
+], TaskOnly.prototype, "username", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Task.prototype, "password", void 0);
+], TaskOnly.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Task.prototype, "newTask", void 0);
-Task = __decorate([
+], TaskOnly.prototype, "newTask", void 0);
+TaskOnly = __decorate([
     (0, typeorm_1.Entity)()
-], Task);
-exports.Task = Task;
+], TaskOnly);
+exports.TaskOnly = TaskOnly;
 //# sourceMappingURL=task.entity.js.map

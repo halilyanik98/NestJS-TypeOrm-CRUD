@@ -14,5 +14,5 @@ class Address {
     @Column()
     public country: string;
 }
-export default Address;
 
+export default Address;

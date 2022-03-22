@@ -12,6 +12,7 @@ import Address from "../entities/address.entity";
 
 @Module({
     imports: [TypeOrmModule.forFeature([User,Address]),
+        //Task,Address
         UsersModule,
         PassportModule,
         JwtModule.register({

@@ -1,13 +1,16 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsNumberString } from "class-validator";
-import {userInfo} from "os";
-
+import {IsNotEmpty} from "class-validator";
+//Model
 export class CreateTaskDto {
-    userId:number;
     //Pipe Kullanılmıştır
+
+    userId:number;
+
     @IsNotEmpty()
     username:string;
-    //Pipe Kullanılmıştır
+
     @IsNotEmpty()
     password:string;
+
+    @IsNotEmpty()
     newTask:string;
 }

@@ -39,7 +39,7 @@ let TaskService = class TaskService {
 };
 TaskService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_2.InjectRepository)(task_entity_1.Task)),
+    __param(0, (0, typeorm_2.InjectRepository)(task_entity_1.TaskOnly)),
     __metadata("design:paramtypes", [typeorm_1.Repository])
 ], TaskService);
 exports.TaskService = TaskService;

@@ -11,9 +11,38 @@ export class User {
 
   @OneToOne(() => Address,{
     eager: true,
-    cascade: ["insert"]
+    cascade: true
   })
   @JoinColumn()
   public address: Address;
 
 }
+
+
+
+
+
+
+
+
+
+
+/*
+  @OneToOne(() => Task,
+      {
+        cascade: true,
+        eager: true,
+      })
+  @JoinColumn()
+  t: Task
+
+
+
+  @OneToOne(() => Task, {
+    cascade: true,
+    eager: true,
+  })
+  @JoinColumn()
+  t: Task;
+*/
+
