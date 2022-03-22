@@ -28,7 +28,7 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
-const user_entity_1 = require("../entities/user.entity");
+const task_entity_1 = require("../entities/task.entity");
 const typeorm_2 = require("typeorm");
 let AuthService = class AuthService {
     constructor(usersService, jwtService, taskRepository) {
@@ -36,10 +36,10 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
         this.taskRepository = taskRepository;
     }
-    async validateUser(id, pass) {
-        const user = await this.taskRepository.findOne(id);
-        console.log(user);
-        if (user && user.password === pass) {
+    async validateUser(username, passt) {
+        console.log('auth.service-validateUser');
+        const user = await this.taskRepository.findOne(username);
+        if (user && user.password === passt) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
         }
@@ -58,11 +58,11 @@ let AuthService = class AuthService {
     findOne(id) {
         return this.taskRepository.findOne(id);
     }
-    create(createUserDto) {
-        return this.taskRepository.save(createUserDto);
+    create(createTaskDto) {
+        return this.taskRepository.save(createTaskDto);
     }
-    update(id, updateUserDto) {
-        return this.taskRepository.update(+id, updateUserDto);
+    update(id, updateTaskDto) {
+        return this.taskRepository.update(+id, updateTaskDto);
     }
     remove(id) {
         return this.taskRepository.delete(id);
@@ -70,7 +70,7 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(2, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(2, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         jwt_1.JwtService,
         typeorm_2.Repository])

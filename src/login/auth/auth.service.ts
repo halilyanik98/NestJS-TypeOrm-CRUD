@@ -2,25 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import {InjectRepository} from "@nestjs/typeorm";
-import {User} from "../entities/user.entity";
+import {Task} from "../entities/task.entity";
 import {Repository} from "typeorm";
-import {CreateUserDto} from "../dto/create-user.dto";
-import {UpdateUserDto} from "../dto/update-user.dto";
+import {CreateTaskDto} from "../../task/dto/create-task.dto";
+import {UpdateTaskDto} from "../../task/dto/update-task.dto";
 
 @Injectable()
 export class AuthService {
     constructor(
         private usersService: UsersService,
         private jwtService: JwtService,
-        @InjectRepository(User)
-        private taskRepository: Repository<User>,
+        @InjectRepository(Task)
+        private taskRepository: Repository<Task>,
     ) {}
 //Doğrulama yapılmaktadır -------------------------------01
-    async validateUser(id: number, pass: string): Promise<any> {
-        const user = await this.taskRepository.findOne(id);
-        console.log(user);
-        if (user && user.password === pass) {
-
+    async validateUser(username: string, passt: string): Promise<any> {
+        console.log('auth.service-validateUser');
+        const user = await this.taskRepository.findOne(username);
+        if (user && user.password === passt) {
             const { password, ...result } = user;
             return result;
         }
@@ -35,19 +34,19 @@ export class AuthService {
         };
     }
 //------------------------------------------------------01
-    findAll(): Promise<User[]> {
+    findAll(): Promise<Task[]> {
         return this.taskRepository.find();
     }
-    findOne(id: number): Promise<User> {
+    findOne(id: number): Promise<Task> {
         return this.taskRepository.findOne(id);
     }
 
-    create(createUserDto: CreateUserDto) {
-        return this.taskRepository.save(createUserDto);
+    create(createTaskDto: CreateTaskDto) {
+        return this.taskRepository.save(createTaskDto);
     }
 
-    update(id: number, updateUserDto: UpdateUserDto) {
-        return this.taskRepository.update(+id,updateUserDto);
+    update(id: number, updateTaskDto: UpdateTaskDto) {
+        return this.taskRepository.update(+id,updateTaskDto);
     }
 
     remove(id: number) {
