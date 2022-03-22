@@ -2,8 +2,8 @@ import {Controller, Get, Request, Post, UseGuards, Param, Body, ParseIntPipe, Pa
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
-import {CreateTaskDto} from "../task/dto/create-task.dto";
-import {UpdateTaskDto} from "../task/dto/update-task.dto";
+import {CreateUserDto} from "./dto/create-user.dto";
+import {UpdateUserDto} from "./dto/update-user.dto";
 
 @Controller('login')
 export class LoginController {
@@ -41,16 +41,16 @@ export class LoginController {
 
     // @UseGuards(JwtAuthGuard)
     @Post()
-    create(@Body() createTaskDto: CreateTaskDto) {
+    create(@Body() createUserDto: CreateUserDto) {
         console.log('Create');
-        return this.authService.create(createTaskDto);
+        return this.authService.create(createUserDto);
     }
 
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
         console.log('Update');
-        return this.authService.update(+id, updateTaskDto);
+        return this.authService.update(+id, updateUserDto);
     }
 
     @UseGuards(JwtAuthGuard)

@@ -17,8 +17,8 @@ const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
 const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
-const create_task_dto_1 = require("../task/dto/create-task.dto");
-const update_task_dto_1 = require("../task/dto/update-task.dto");
+const create_user_dto_1 = require("./dto/create-user.dto");
+const update_user_dto_1 = require("./dto/update-user.dto");
 let LoginController = class LoginController {
     constructor(authService) {
         this.authService = authService;
@@ -39,13 +39,13 @@ let LoginController = class LoginController {
         console.log('FindAll İD');
         return this.authService.findOne(id);
     }
-    create(createTaskDto) {
+    create(createUserDto) {
         console.log('Create');
-        return this.authService.create(createTaskDto);
+        return this.authService.create(createUserDto);
     }
-    update(id, updateTaskDto) {
+    update(id, updateUserDto) {
         console.log('Update');
-        return this.authService.update(+id, updateTaskDto);
+        return this.authService.update(+id, updateUserDto);
     }
     remove(id) {
         console.log('Delete');
@@ -87,7 +87,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_task_dto_1.CreateTaskDto]),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "create", null);
 __decorate([
@@ -96,7 +96,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_task_dto_1.UpdateTaskDto]),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "update", null);
 __decorate([
