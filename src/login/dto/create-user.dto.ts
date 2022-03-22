@@ -1,16 +1,12 @@
 import {IsNotEmpty} from "class-validator";
+import {PrimaryGeneratedColumn} from "typeorm";
 //Model
-export class CreateTaskDto {
-    //Pipe Kullanılmıştır
-
+export class CreateUserDto {
+    //Use Pipe
+    @PrimaryGeneratedColumn()
     userId:number;
-
     @IsNotEmpty()
     username:string;
-
     @IsNotEmpty()
     password:string;
-
-    @IsNotEmpty()
-    newTask:string;
 }

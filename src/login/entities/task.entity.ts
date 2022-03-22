@@ -1,18 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
-
+import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 @Entity()
 export class Task {
-  @PrimaryGeneratedColumn()
-  userId: number;
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column()
+    task:string;
 
-  @Column()
-  username: string;
 
-  @Column()
-  password:string;
-
-  @Column()
-  newTask: string;
 
 }

@@ -1,4 +1,4 @@
-export declare class Task {
+export declare class TaskOnly {
     userId: number;
     username: string;
     password: string;

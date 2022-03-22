@@ -17,24 +17,44 @@ const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
 const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
+const create_user_dto_1 = require("./dto/create-user.dto");
+const update_user_dto_1 = require("./dto/update-user.dto");
 let LoginController = class LoginController {
     constructor(authService) {
         this.authService = authService;
     }
     async login(req) {
+        console.log('login.controller-Post');
         return this.authService.login(req.user);
     }
     getProfile(req) {
+        console.log('login.controller-profileGet');
         return req.user;
     }
-    deneme(id) {
-        console.log("sadasasdasd");
-        return "dasdasdasd";
+    findAll() {
+        console.log('FindAll');
+        return this.authService.findAll();
+    }
+    findOne(id) {
+        console.log('FindAll İD');
+        return this.authService.findOne(id);
+    }
+    create(createUserDto) {
+        console.log('Create');
+        return this.authService.create(createUserDto);
+    }
+    update(id, updateUserDto) {
+        console.log('Update');
+        return this.authService.update(+id, updateUserDto);
+    }
+    remove(id) {
+        console.log('Delete');
+        return this.authService.remove(+id);
     }
 };
 __decorate([
     (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
-    (0, common_1.Post)('auth/login'),
+    (0, common_1.Post)('login'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -49,13 +69,40 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "getProfile", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Post)('deneme'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], LoginController.prototype, "deneme", null);
+], LoginController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "remove", null);
 LoginController = __decorate([
     (0, common_1.Controller)('login'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

@@ -16,19 +16,11 @@ let Task = class Task {
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Task.prototype, "userId", void 0);
+], Task.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Task.prototype, "username", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Task.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Task.prototype, "newTask", void 0);
+], Task.prototype, "task", void 0);
 Task = __decorate([
     (0, typeorm_1.Entity)()
 ], Task);

@@ -21,5 +21,9 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateTaskDto.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateTaskDto.prototype, "newTask", void 0);
 exports.CreateTaskDto = CreateTaskDto;
 //# sourceMappingURL=create-task.dto.js.map

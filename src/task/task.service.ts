@@ -2,22 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Repository } from 'typeorm';
-import { Task } from './entities/task.entity';
+import { TaskOnly } from './entities/task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TaskService {
 
   constructor(
-    @InjectRepository(Task)
-    private taskRepository: Repository<Task>,
+    @InjectRepository(TaskOnly)
+    private taskRepository: Repository<TaskOnly>,
   ) {}
 
-  findAll(): Promise<Task[]> {
+  findAll(): Promise<TaskOnly[]> {
     return this.taskRepository.find();
   }
 
-  findOne(id: number): Promise<Task> {
+  findOne(id: number): Promise<TaskOnly> {
     return this.taskRepository.findOne(id);
   }
   

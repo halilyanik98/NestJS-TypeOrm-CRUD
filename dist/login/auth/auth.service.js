@@ -28,7 +28,7 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
-const task_entity_1 = require("../entities/task.entity");
+const user_entity_1 = require("../entities/user.entity");
 const typeorm_2 = require("typeorm");
 let AuthService = class AuthService {
     constructor(usersService, jwtService, taskRepository) {
@@ -36,10 +36,9 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
         this.taskRepository = taskRepository;
     }
-    async validateUser(username, pass) {
-        console.log('auth.service1');
-        const user = await this.taskRepository.findOne(username);
-        console.log('auth.service2');
+    async validateUser(id, pass) {
+        const user = await this.taskRepository.findOne(id);
+        console.log(user);
         if (user && user.password === pass) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
@@ -47,16 +46,31 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
-        console.log("logindesin");
-        const payload = { username: user.username, sub: user.userId };
+        console.log("auth.service-login");
+        const payload = { userId: user.userId, username: user.username, password: user.password, newTask: user.newTask };
         return {
-            access_token: this.jwtService.sign(payload),
+            access_token: this.jwtService.sign(payload)
         };
+    }
+    findAll() {
+        return this.taskRepository.find();
+    }
+    findOne(id) {
+        return this.taskRepository.findOne(id);
+    }
+    create(createUserDto) {
+        return this.taskRepository.save(createUserDto);
+    }
+    update(id, updateUserDto) {
+        return this.taskRepository.update(+id, updateUserDto);
+    }
+    remove(id) {
+        return this.taskRepository.delete(id);
     }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(2, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
+    __param(2, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         jwt_1.JwtService,
         typeorm_2.Repository])
