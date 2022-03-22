@@ -10,7 +10,10 @@ export declare class LoginController {
     getProfile(req: any): any;
     findAll(): Promise<import("./entities/task.entity").Task[]>;
     findOne(id: number): Promise<import("./entities/task.entity").Task>;
-    create(createTaskDto: CreateTaskDto): Promise<CreateTaskDto & import("./entities/task.entity").Task>;
+    create(createTaskDto: CreateTaskDto): Promise<{
+        id?: number;
+        task?: string;
+    }[]>;
     update(id: string, updateTaskDto: UpdateTaskDto): Promise<import("typeorm").UpdateResult>;
     remove(id: string): Promise<import("typeorm").DeleteResult>;
 }
