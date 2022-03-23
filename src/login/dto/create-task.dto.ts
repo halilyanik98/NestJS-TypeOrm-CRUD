@@ -4,7 +4,7 @@ import {PrimaryGeneratedColumn} from "typeorm";
 export class CreateTaskDto {
     //Use Pipe
     @PrimaryGeneratedColumn()
-    idd:number;
+    id:number;
     @IsNotEmpty()
     task:string;
 }

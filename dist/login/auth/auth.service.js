@@ -55,17 +55,19 @@ let AuthService = class AuthService {
         };
     }
     findAll(p) {
-        return this.userRepository.find();
+        return this.userRepository.find({ relations: ['dbTask'] });
     }
     find_One(id) {
         return this.userRepository.findOne(id);
     }
-    create2(createUserDto) {
-        return this.userRepository.save(createUserDto);
-    }
-    async create(createUserDto, createTaskDto) {
-        return this.userRepository.save(createUserDto);
-        return this.taskRepository.save(createTaskDto);
+    create(createUserDto, createTaskDto) {
+        const task = new task_entity_1.Task();
+        task.tasking = createTaskDto.task;
+        const user = new user_entity_1.User();
+        user.username = createUserDto.username;
+        user.password = createUserDto.password;
+        user.dbTask = [task];
+        return this.taskRepository.manager.save(user);
     }
     update(id, updateUserDto) {
         return this.userRepository.update(+id, updateUserDto);

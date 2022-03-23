@@ -1,9 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, ManyToOne} from "typeorm"
+import { User } from "./user.entity"
 
 @Entity()
 export class Task {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
+
   @Column()
-  task:string;
+  tasking: string
+
+  @ManyToOne((type) => User, (user) => user.dbTask)
+  qTask: User[]
 }

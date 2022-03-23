@@ -27,13 +27,11 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => task_entity_1.Task, {
-        eager: true,
-        cascade: true
+    (0, typeorm_1.OneToMany)((type) => task_entity_1.Task, (Task) => Task.qTask, {
+        cascade: true,
     }),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", task_entity_1.Task)
-], User.prototype, "t", void 0);
+    __metadata("design:type", Array)
+], User.prototype, "dbTask", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

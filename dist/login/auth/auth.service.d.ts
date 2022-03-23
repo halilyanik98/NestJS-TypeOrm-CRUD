@@ -20,8 +20,7 @@ export declare class AuthService {
         relations: string[];
     }): Promise<User[]>;
     find_One(id: number): Promise<User>;
-    create2(createUserDto: CreateUserDto): Promise<CreateUserDto & User>;
-    create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto): Promise<(CreateUserDto & User) | (CreateTaskDto & Task)>;
+    create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto): Promise<User>;
     update(id: number, updateUserDto: UpdateUserDto): Promise<import("typeorm").UpdateResult>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;
     getAllAddressesWithUsers(): Promise<User[]>;

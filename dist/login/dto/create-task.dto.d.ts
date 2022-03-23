@@ -1,4 +1,4 @@
 export declare class CreateTaskDto {
-    idd: number;
+    id: number;
     task: string;
 }

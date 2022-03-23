@@ -1,4 +1,6 @@
+import { User } from "./user.entity";
 export declare class Task {
     id: number;
-    task: string;
+    tasking: string;
+    qTask: User[];
 }

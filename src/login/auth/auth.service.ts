@@ -9,6 +9,7 @@ import {UpdateUserDto} from "../dto/update-user.dto";
 import {Task} from "../entities/task.entity";
 import {CreateTaskDto} from "../dto/create-task.dto";
 
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -40,20 +41,23 @@ export class AuthService {
     }
 //------------------------------------------------------01
     findAll(p: { relations: string[] }): Promise<User[]> {
-        return this.userRepository.find();
+        return this.userRepository.find({ relations: ['dbTask'] });
     }
 
     find_One(id: number): Promise<User> {
         return this.userRepository.findOne(id);
     }
 
-    create2(createUserDto: CreateUserDto) {
-        return this.userRepository.save(createUserDto);
-    }
+    create(createUserDto: CreateUserDto,createTaskDto:CreateTaskDto) {
+        const task = new Task()
+        task.tasking = createTaskDto.task
 
-    async create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto) {
-        return this.userRepository.save(createUserDto);
-        return this.taskRepository.save(createTaskDto);
+        const user = new User()
+        user.username = createUserDto.username
+        user.password = createUserDto.password
+        user.dbTask = [task]
+        return this.taskRepository.manager.save(user)
+
     }
 
     update(id: number, updateUserDto: UpdateUserDto) {

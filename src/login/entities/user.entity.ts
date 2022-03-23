@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany, JoinTable, OneToMany} from 'typeorm';
 import {Task} from "./task.entity";
 @Entity()
 export class User {
@@ -9,11 +9,22 @@ export class User {
   @Column()
   password: string;
 
+
+  @OneToMany ((type) => Task, (Task) => Task.qTask, {
+    cascade: true,
+  })
+  //@JoinColumn()
+  dbTask: Task[]
+}
+
+/*
   @OneToOne(() => Task,{
     eager: true,
     cascade: true
   })
   @JoinColumn()
-  public t: Task;
+  public t: Task[];
 
 }
+
+*/

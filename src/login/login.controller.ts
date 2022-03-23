@@ -26,35 +26,34 @@ export class LoginController {
 //---------------------------------------------------------01
 
 //---------------------------------------------------------02
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get()
     findAll() {
         console.log('FindAll');
         return this.authService.findAll({ relations: ['user'] });
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get(':id')
     find_One(@Param('id' ,ParseIntPipe) id: number) {
-        console.log('FindAll İD');
         return this.authService.find_One(id);
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createUserDto: CreateUserDto, @Body() createTaskDto:CreateTaskDto) {
         console.log('Create');
         return this.authService.create(createUserDto,createTaskDto);
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
         console.log('Update');
         return this.authService.update(+id, updateUserDto);
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Delete(':id')
     remove(@Param('id') id: string) {
         console.log('Delete');

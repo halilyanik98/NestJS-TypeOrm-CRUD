@@ -11,7 +11,7 @@ export declare class LoginController {
     getProfile(req: any): any;
     findAll(): Promise<import("./entities/user.entity").User[]>;
     find_One(id: number): Promise<import("./entities/user.entity").User>;
-    create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto): Promise<(CreateUserDto & import("./entities/user.entity").User) | (CreateTaskDto & import("./entities/task.entity").Task)>;
+    create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto): Promise<import("./entities/user.entity").User>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<import("typeorm").UpdateResult>;
     remove(id: string): Promise<import("typeorm").DeleteResult>;
 }
