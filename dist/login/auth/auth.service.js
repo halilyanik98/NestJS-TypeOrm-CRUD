@@ -58,7 +58,7 @@ let AuthService = class AuthService {
         return this.userRepository.find({ relations: ['dbTask'] });
     }
     find_One(id) {
-        return this.userRepository.findOne(id);
+        return this.userRepository.findOne(id, { relations: ['dbTask'] });
     }
     create(createUserDto, createTaskDto) {
         const task = new task_entity_1.Task();
@@ -74,9 +74,6 @@ let AuthService = class AuthService {
     }
     remove(id) {
         return this.userRepository.delete(id);
-    }
-    getAllAddressesWithUsers() {
-        return this.userRepository.find({ relations: ['address'] });
     }
 };
 AuthService = __decorate([

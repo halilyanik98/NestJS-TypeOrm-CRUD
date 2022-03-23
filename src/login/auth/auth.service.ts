@@ -45,7 +45,7 @@ export class AuthService {
     }
 
     find_One(id: number): Promise<User> {
-        return this.userRepository.findOne(id);
+        return this.userRepository.findOne(id,{ relations: ['dbTask'] });
     }
 
     create(createUserDto: CreateUserDto,createTaskDto:CreateTaskDto) {
@@ -66,9 +66,5 @@ export class AuthService {
 
     remove(id: number) {
         return this.userRepository.delete(id);
-    }
-
-    getAllAddressesWithUsers() {
-        return this.userRepository.find({ relations: ['address'] });
     }
 }

@@ -23,5 +23,4 @@ export declare class AuthService {
     create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto): Promise<User>;
     update(id: number, updateUserDto: UpdateUserDto): Promise<import("typeorm").UpdateResult>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;
-    getAllAddressesWithUsers(): Promise<User[]>;
 }

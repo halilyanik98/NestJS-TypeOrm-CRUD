@@ -16,15 +16,3 @@ export class User {
   //@JoinColumn()
   dbTask: Task[]
 }
-
-/*
-  @OneToOne(() => Task,{
-    eager: true,
-    cascade: true
-  })
-  @JoinColumn()
-  public t: Task[];
-
-}
-
-*/
