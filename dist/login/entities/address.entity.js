@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Address = void 0;
 const typeorm_1 = require("typeorm");
 let Address = class Address {
 };
@@ -31,5 +32,5 @@ __decorate([
 Address = __decorate([
     (0, typeorm_1.Entity)()
 ], Address);
-exports.default = Address;
+exports.Address = Address;
 //# sourceMappingURL=address.entity.js.map

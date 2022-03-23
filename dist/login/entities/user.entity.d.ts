@@ -1,7 +1,7 @@
-import Address from "./address.entity";
+import { Task } from "./task.entity";
 export declare class User {
     id: number;
     username: string;
     password: string;
-    address: Address;
+    t: Task;
 }

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-class Address {
+export class Address {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -14,5 +14,3 @@ class Address {
     @Column()
     public country: string;
 }
-
-export default Address;

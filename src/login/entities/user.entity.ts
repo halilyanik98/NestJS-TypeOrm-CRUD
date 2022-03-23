@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn} from 'typeorm';
-import Address from "./address.entity";
+import {Task} from "./task.entity";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -9,40 +9,11 @@ export class User {
   @Column()
   password: string;
 
-  @OneToOne(() => Address,{
+  @OneToOne(() => Task,{
     eager: true,
     cascade: true
   })
   @JoinColumn()
-  public address: Address;
+  public t: Task;
 
 }
-
-
-
-
-
-
-
-
-
-
-/*
-  @OneToOne(() => Task,
-      {
-        cascade: true,
-        eager: true,
-      })
-  @JoinColumn()
-  t: Task
-
-
-
-  @OneToOne(() => Task, {
-    cascade: true,
-    eager: true,
-  })
-  @JoinColumn()
-  t: Task;
-*/
-

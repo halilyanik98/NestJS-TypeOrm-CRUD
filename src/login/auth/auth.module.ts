@@ -8,11 +8,10 @@ import {JwtModule} from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "../entities/user.entity";
-import Address from "../entities/address.entity";
+import {Task} from "../entities/task.entity";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User,Address]),
-        //Task,Address
+    imports: [TypeOrmModule.forFeature([User,Task]),
         UsersModule,
         PassportModule,
         JwtModule.register({

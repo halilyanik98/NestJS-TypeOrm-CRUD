@@ -30,15 +30,17 @@ const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../entities/user.entity");
 const typeorm_2 = require("typeorm");
+const task_entity_1 = require("../entities/task.entity");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService, taskRepository) {
+    constructor(usersService, jwtService, userRepository, taskRepository) {
         this.usersService = usersService;
         this.jwtService = jwtService;
+        this.userRepository = userRepository;
         this.taskRepository = taskRepository;
     }
     async validateUser(username, pass) {
         console.log('auth.service-validateUser');
-        const user = await this.taskRepository.findOne(username);
+        const user = await this.userRepository.findOne(username);
         if (user && user.password === pass) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
@@ -52,27 +54,36 @@ let AuthService = class AuthService {
             access_token: this.jwtService.sign(payload)
         };
     }
-    findAll() {
-        return this.taskRepository.find();
+    findAll(p) {
+        return this.userRepository.find();
     }
-    findOne(id) {
-        return this.taskRepository.findOne(id);
+    find_One(id) {
+        return this.userRepository.findOne(id);
     }
-    create(createUserDto) {
-        return this.taskRepository.save(createUserDto);
+    create2(createUserDto) {
+        return this.userRepository.save(createUserDto);
+    }
+    async create(createUserDto, createTaskDto) {
+        return this.userRepository.save(createUserDto);
+        return this.taskRepository.save(createTaskDto);
     }
     update(id, updateUserDto) {
-        return this.taskRepository.update(+id, updateUserDto);
+        return this.userRepository.update(+id, updateUserDto);
     }
     remove(id) {
-        return this.taskRepository.delete(id);
+        return this.userRepository.delete(id);
+    }
+    getAllAddressesWithUsers() {
+        return this.userRepository.find({ relations: ['address'] });
     }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(2, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(3, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         jwt_1.JwtService,
+        typeorm_2.Repository,
         typeorm_2.Repository])
 ], AuthService);
 exports.AuthService = AuthService;

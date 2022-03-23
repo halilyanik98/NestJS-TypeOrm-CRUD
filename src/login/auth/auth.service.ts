@@ -6,6 +6,8 @@ import {User} from "../entities/user.entity";
 import {Repository} from "typeorm";
 import {CreateUserDto} from "../dto/create-user.dto";
 import {UpdateUserDto} from "../dto/update-user.dto";
+import {Task} from "../entities/task.entity";
+import {CreateTaskDto} from "../dto/create-task.dto";
 
 @Injectable()
 export class AuthService {
@@ -13,12 +15,15 @@ export class AuthService {
         private usersService: UsersService,
         private jwtService: JwtService,
         @InjectRepository(User)
-        private taskRepository: Repository<User>,
+        private userRepository: Repository<User>,
+        @InjectRepository(Task)
+        private taskRepository: Repository<Task>,
     ) {}
+
 //Doğrulama yapılmaktadır -------------------------------01
-    async validateUser(username: string, pass: string): Promise<any> {
+    async validateUser(username: number, pass: string): Promise<any> {
         console.log('auth.service-validateUser');
-        const user = await this.taskRepository.findOne(username);
+        const user = await this.userRepository.findOne(username);
         if (user && user.password === pass) {
             const { password, ...result } = user;
             return result;
@@ -34,22 +39,32 @@ export class AuthService {
         };
     }
 //------------------------------------------------------01
-    findAll(): Promise<User[]> {
-        return this.taskRepository.find();
-    }
-    findOne(id: number): Promise<User> {
-        return this.taskRepository.findOne(id);
+    findAll(p: { relations: string[] }): Promise<User[]> {
+        return this.userRepository.find();
     }
 
-    create(createUserDto: CreateUserDto) {
-        return this.taskRepository.save(createUserDto);
+    find_One(id: number): Promise<User> {
+        return this.userRepository.findOne(id);
+    }
+
+    create2(createUserDto: CreateUserDto) {
+        return this.userRepository.save(createUserDto);
+    }
+
+    async create(createUserDto: CreateUserDto, createTaskDto: CreateTaskDto) {
+        return this.userRepository.save(createUserDto);
+        return this.taskRepository.save(createTaskDto);
     }
 
     update(id: number, updateUserDto: UpdateUserDto) {
-        return this.taskRepository.update(+id,updateUserDto);
+        return this.userRepository.update(+id,updateUserDto);
     }
 
     remove(id: number) {
-        return this.taskRepository.delete(id);
+        return this.userRepository.delete(id);
+    }
+
+    getAllAddressesWithUsers() {
+        return this.userRepository.find({ relations: ['address'] });
     }
 }

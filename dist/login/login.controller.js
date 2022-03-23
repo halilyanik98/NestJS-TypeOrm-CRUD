@@ -19,6 +19,7 @@ const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
+const create_task_dto_1 = require("./dto/create-task.dto");
 let LoginController = class LoginController {
     constructor(authService) {
         this.authService = authService;
@@ -33,15 +34,15 @@ let LoginController = class LoginController {
     }
     findAll() {
         console.log('FindAll');
-        return this.authService.findAll();
+        return this.authService.findAll({ relations: ['user'] });
     }
-    findOne(id) {
+    find_One(id) {
         console.log('FindAll İD');
-        return this.authService.findOne(id);
+        return this.authService.find_One(id);
     }
-    create(createUserDto) {
+    create(createUserDto, createTaskDto) {
         console.log('Create');
-        return this.authService.create(createUserDto);
+        return this.authService.create(createUserDto, createTaskDto);
     }
     update(id, updateUserDto) {
         console.log('Update');
@@ -54,7 +55,7 @@ let LoginController = class LoginController {
 };
 __decorate([
     (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
-    (0, common_1.Post)('auth/login'),
+    (0, common_1.Post)('login'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -82,12 +83,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], LoginController.prototype, "findOne", null);
+], LoginController.prototype, "find_One", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto, create_task_dto_1.CreateTaskDto]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "create", null);
 __decorate([
