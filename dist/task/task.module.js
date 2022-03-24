@@ -7,19 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskModule = void 0;
-const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("../entities/user.entity");
+const task_entity_1 = require("../entities/task.entity");
 const task_service_1 = require("./task.service");
 const task_controller_1 = require("./task.controller");
-const typeorm_1 = require("@nestjs/typeorm");
-const task_entity_1 = require("./entities/task.entity");
+const common_1 = require("@nestjs/common");
 let TaskModule = class TaskModule {
 };
 TaskModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([task_entity_1.TaskOnly])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, task_entity_1.Task]),],
         controllers: [task_controller_1.TaskController],
         providers: [task_service_1.TaskService],
-        exports: [typeorm_1.TypeOrmModule],
+        exports: []
     })
 ], TaskModule);
 exports.TaskModule = TaskModule;

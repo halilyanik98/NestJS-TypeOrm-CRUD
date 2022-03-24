@@ -14,12 +14,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
-const local_auth_guard_1 = require("./auth/local-auth.guard");
+const jwt_auth_guard_1 = require("./jwt-auth.guard");
+const local_auth_guard_1 = require("./local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
-const create_task_dto_1 = require("./dto/create-task.dto");
 let LoginController = class LoginController {
     constructor(authService) {
         this.authService = authService;
@@ -39,9 +38,9 @@ let LoginController = class LoginController {
     find_One(id) {
         return this.authService.find_One(id);
     }
-    create(createUserDto, createTaskDto) {
+    create(createUserDto) {
         console.log('Create');
-        return this.authService.create(createUserDto, createTaskDto);
+        return this.authService.create(createUserDto);
     }
     update(id, updateUserDto) {
         console.log('Update');
@@ -84,9 +83,8 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto, create_task_dto_1.CreateTaskDto]),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "create", null);
 __decorate([

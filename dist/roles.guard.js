@@ -10,7 +10,7 @@ exports.RolesGuard = void 0;
 const common_1 = require("@nestjs/common");
 let RolesGuard = class RolesGuard {
     canActivate(context) {
-        console.log('Roles Guard');
+        console.log('Roles guard');
         return true;
     }
 };

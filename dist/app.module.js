@@ -8,13 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const task_module_1 = require("./task/task.module");
-const task_service_1 = require("./task/task.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const auth_module_1 = require("./login/auth/auth.module");
-const users_module_1 = require("./login/users/users.module");
-const login_controller_1 = require("./login/login.controller");
+const auth_module_1 = require("./auth/auth.module");
+const user_module_1 = require("./user/user.module");
+const task_module_1 = require("./task/task.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23,9 +21,9 @@ AppModule = __decorate([
                 useFactory: async () => Object.assign(await (0, typeorm_2.getConnectionOptions)(), {
                     autoLoadEntities: true,
                 }),
-            }), task_module_1.TaskModule, auth_module_1.AuthModule, users_module_1.UsersModule],
-        controllers: [login_controller_1.LoginController],
-        providers: [task_service_1.TaskService],
+            }), auth_module_1.AuthModule, user_module_1.UserModule, task_module_1.TaskModule],
+        controllers: [],
+        providers: [],
     })
 ], AppModule);
 exports.AppModule = AppModule;

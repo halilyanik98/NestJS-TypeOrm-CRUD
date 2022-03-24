@@ -14,33 +14,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("typeorm");
-const task_entity_1 = require("./entities/task.entity");
-const typeorm_2 = require("@nestjs/typeorm");
+const typeorm_1 = require("@nestjs/typeorm");
+const task_entity_1 = require("../entities/task.entity");
+const typeorm_2 = require("typeorm");
 let TaskService = class TaskService {
     constructor(taskRepository) {
         this.taskRepository = taskRepository;
     }
-    findAll() {
-        return this.taskRepository.find();
-    }
-    findOne(id) {
-        return this.taskRepository.findOne(id);
-    }
-    create(createTaskDto) {
-        return this.taskRepository.save(createTaskDto);
-    }
-    update(id, updateTaskDto) {
-        return this.taskRepository.update(+id, updateTaskDto);
-    }
-    remove(id) {
-        return this.taskRepository.delete(id);
+    findAll(p) {
+        return this.taskRepository.find({ relations: ['qTask'] });
     }
 };
 TaskService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_2.InjectRepository)(task_entity_1.TaskOnly)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(0, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], TaskService);
 exports.TaskService = TaskService;
 //# sourceMappingURL=task.service.js.map

@@ -25,18 +25,14 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../entities/user.entity");
 const typeorm_2 = require("typeorm");
-const task_entity_1 = require("../entities/task.entity");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService, userRepository, taskRepository) {
-        this.usersService = usersService;
+    constructor(jwtService, userRepository) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
-        this.taskRepository = taskRepository;
     }
     async validateUser(username, pass) {
         console.log('auth.service-validateUser');
@@ -60,14 +56,8 @@ let AuthService = class AuthService {
     find_One(id) {
         return this.userRepository.findOne(id, { relations: ['dbTask'] });
     }
-    create(createUserDto, createTaskDto) {
-        const task = new task_entity_1.Task();
-        task.tasking = createTaskDto.task;
-        const user = new user_entity_1.User();
-        user.username = createUserDto.username;
-        user.password = createUserDto.password;
-        user.dbTask = [task];
-        return this.taskRepository.manager.save(user);
+    create(createUserDto) {
+        return this.userRepository.save(createUserDto);
     }
     update(id, updateUserDto) {
         return this.userRepository.update(+id, updateUserDto);
@@ -78,11 +68,8 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(2, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __param(3, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
-    __metadata("design:paramtypes", [users_service_1.UsersService,
-        jwt_1.JwtService,
-        typeorm_2.Repository,
+    __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [jwt_1.JwtService,
         typeorm_2.Repository])
 ], AuthService);
 exports.AuthService = AuthService;

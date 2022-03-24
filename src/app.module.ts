@@ -1,13 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TaskController } from './task/task.controller';
-import { TaskModule } from './task/task.module';
-import { TaskService } from './task/task.service';
-import {TypeOrmModule} from '@nestjs/typeorm';
+import {TypeOrmModule} from   '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
-import {JwtModule, JwtService} from "@nestjs/jwt";
-import {AuthModule} from "./login/auth/auth.module";
-import {UsersModule} from "./login/users/users.module";
-import {LoginController} from "./login/login.controller";
+import {AuthModule} from "./auth/auth.module";
+import {UserModule} from "./user/user.module";
+import {TaskModule} from "./task/task.module";
 
 
 @Module({
@@ -16,11 +12,9 @@ import {LoginController} from "./login/login.controller";
       Object.assign(await getConnectionOptions(), {
         autoLoadEntities: true,
       }),
-  }),TaskModule,AuthModule, UsersModule],
-
- // imports: [AuthModule, UsersModule],
-  controllers: [LoginController],
-  providers: [TaskService],
+  }),AuthModule,UserModule,TaskModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
 
