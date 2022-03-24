@@ -17,8 +17,9 @@ export class TaskService{
         return this.taskRepository.find({ relations: ['userId'] });
     }
 
-    findOne(id: number): Promise<Task> {
-        return this.taskRepository.findOne(id,{ relations: ['userId'] });
+    findOne(id:number): Promise<Task> {
+        return this.taskRepository.findOne(id);
+        //userId==id olanları göster.
     }
 
     create(createTaskDto: CreateTaskDto,@Request() req) {
