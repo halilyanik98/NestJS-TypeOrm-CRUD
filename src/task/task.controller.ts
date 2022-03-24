@@ -1,10 +1,8 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards, Request} from "@nestjs/common";
 import {JwtAuthGuard} from "../auth/guard/jwt-auth.guard";
 import {TaskService} from "./task.service";
-import {CreateUserDto} from "../dto/create-user.dto";
-import {UpdateUserDto} from "../dto/update-user.dto";
-import {CreateTaskDto} from "../dto/create-task.dto";
-import {UpdateTaskDto} from "../dto/update-task.dto";
+import {CreateTaskDto} from "./dto/create-task.dto";
+import {UpdateTaskDto} from "./dto/update-task.dto";
 
 @Controller ('task')
 
@@ -25,9 +23,8 @@ export class TaskController{
 
     @UseGuards(JwtAuthGuard)
     @Post()
-    create(@Body() createTaskDto: CreateTaskDto) {
-        console.log('Create');
-        return this.taskService.create(createTaskDto);
+    create(@Body() createTaskDto: CreateTaskDto,@Request() req) {
+        return this.taskService.create(createTaskDto,req);
     }
 
     @UseGuards(JwtAuthGuard)

@@ -7,4 +7,5 @@ export class CreateTaskDto {
     id:number;
     @IsNotEmpty()
     tasking:string;
+
 }

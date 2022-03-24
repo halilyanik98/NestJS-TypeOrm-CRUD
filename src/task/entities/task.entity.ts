@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm"
-import { User } from "./user.entity"
+import { User } from "../../user/entities/user.entity"
 
 @Entity()
 export class Task {
@@ -10,5 +10,5 @@ export class Task {
   tasking: string
 
   @ManyToOne((type) => User, (user) => user.dbTask)
-  qTask: User[]
+  userId: User[]
 }
