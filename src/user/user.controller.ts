@@ -1,6 +1,6 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards} from "@nestjs/common";
-import {CreateUserDto} from "../dto/create-user.dto";
-import {UpdateUserDto} from "../dto/update-user.dto";
+import {Body, Controller, Delete, Get, Patch, Post, UseGuards,Request} from "@nestjs/common";
+import {CreateUserDto} from "./dto/create-user.dto";
+import {UpdateUserDto} from "./dto/update-user.dto";
 import {UserService} from "./user.service";
 import {JwtAuthGuard} from "../auth/guard/jwt-auth.guard";
 
@@ -8,6 +8,13 @@ import {JwtAuthGuard} from "../auth/guard/jwt-auth.guard";
 
 export class UserController{
     constructor(private userService:UserService) {}
+
+    //@UseGuards(JwtAuthGuard)
+    @Post()
+    create(@Body() createUserDto: CreateUserDto) {
+        console.log('Create');
+        return this.userService.create(createUserDto);
+    }
 
     @UseGuards(JwtAuthGuard)
     @Get()
@@ -17,30 +24,23 @@ export class UserController{
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get(':id')
-    find_One(@Param('id' ,ParseIntPipe) id: number) {
-        return this.userService.find_One(id);
+    @Get('profile')
+    find_One(@Request() req) {
+        return this.userService.find_One(req.user.id);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post()
-    create(@Body() createUserDto: CreateUserDto) {
-        console.log('Create');
-        return this.userService.create(createUserDto);
-    }
-
-    @UseGuards(JwtAuthGuard)
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    @Patch()
+    update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
         console.log('Update');
-        return this.userService.update(+id, updateUserDto);
+        return this.userService.update(req.user.id, updateUserDto);
     }
 
-        @UseGuards(JwtAuthGuard)
-    @Delete(':id')
-    remove(@Param('id') id: string) {
+    @UseGuards(JwtAuthGuard)
+    @Delete()
+    remove(@Request() req) {
         console.log('Delete');
-        return this.userService.remove(+id);
+        return this.userService.remove(req.user.id);
     }
     //-----------------------------------------------------02
 }
