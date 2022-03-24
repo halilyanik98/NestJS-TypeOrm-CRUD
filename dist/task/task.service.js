@@ -24,6 +24,18 @@ let TaskService = class TaskService {
     findAll(p) {
         return this.taskRepository.find({ relations: ['qTask'] });
     }
+    findOne(id) {
+        return this.taskRepository.findOne(id, { relations: ['dbTask'] });
+    }
+    create(createTaskDto) {
+        return this.taskRepository.save(createTaskDto);
+    }
+    update(id, updateTaskDto) {
+        return this.taskRepository.update(+id, updateTaskDto);
+    }
+    remove(id) {
+        return this.taskRepository.delete(id);
+    }
 };
 TaskService = __decorate([
     (0, common_1.Injectable)(),

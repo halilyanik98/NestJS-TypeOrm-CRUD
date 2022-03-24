@@ -6,7 +6,7 @@ import {TaskController} from "./task.controller";
 import {Module} from "@nestjs/common";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User,Task]),],
+    imports: [TypeOrmModule.forFeature([Task]),],
     controllers :[TaskController],
     providers:[TaskService],
     exports:[]

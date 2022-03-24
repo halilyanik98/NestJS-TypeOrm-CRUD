@@ -6,5 +6,5 @@ export class CreateTaskDto {
     @PrimaryGeneratedColumn()
     id:number;
     @IsNotEmpty()
-    task:string;
+    tasking:string;
 }

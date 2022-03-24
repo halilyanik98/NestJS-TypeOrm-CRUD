@@ -6,7 +6,7 @@ import {User} from "../entities/user.entity";
 import {Task} from "../entities/task.entity";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User,Task]),],
+    imports: [TypeOrmModule.forFeature([User]),],
     controllers: [UserController],
     providers:[UserService],
     exports : []
