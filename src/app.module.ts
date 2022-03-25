@@ -4,6 +4,7 @@ import { getConnectionOptions } from 'typeorm';
 import {AuthModule} from "./auth/auth.module";
 import {UserModule} from "./user/user.module";
 import {TaskModule} from "./task/task.module";
+import {CategoryModule} from "./category/category.module";
 
 
 @Module({
@@ -12,7 +13,7 @@ import {TaskModule} from "./task/task.module";
       Object.assign(await getConnectionOptions(), {
         autoLoadEntities: true,
       }),
-  }),AuthModule,UserModule,TaskModule],
+  }),AuthModule,UserModule,TaskModule,CategoryModule],
   controllers: [],
   providers: [],
 })

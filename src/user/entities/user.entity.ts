@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
-import {Task} from "./task.entity";
+import {Task} from "../../task/entities/task.entity";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -9,8 +9,7 @@ export class User {
   @Column()
   password: string;
 
-
-  @OneToMany ((type) => Task, (Task) => Task.qTask, {
+  @OneToMany ((type) => Task, (Task) => Task.user, {
     cascade: true,
   })
   //@JoinColumn()
