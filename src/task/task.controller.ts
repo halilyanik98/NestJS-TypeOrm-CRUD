@@ -8,6 +8,15 @@ import {UpdateTaskDto} from "./dto/update-task.dto";
 
 export class TaskController{
     constructor(private taskService:TaskService) {}
+
+    @UseGuards(JwtAuthGuard)
+    @Post()
+    create(@Body() createTaskDto: CreateTaskDto,@Request() req) {
+        return this.taskService.create(createTaskDto,req);
+    }
+
+
+
     @UseGuards(JwtAuthGuard)
     @Get()
     findAll() {
@@ -21,24 +30,19 @@ export class TaskController{
         return this.taskService.findOne(req.user.id);
     }
 
-    @UseGuards(JwtAuthGuard)
-    @Post()
-    create(@Body() createTaskDto: CreateTaskDto,@Request() req) {
-        return this.taskService.create(createTaskDto,req);
-    }
+
 
     @UseGuards(JwtAuthGuard)
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    @Patch()
+    update(@Request() req ,@Body() updateTaskDto: UpdateTaskDto) {
         console.log('Update');
-        return this.taskService.update(+id, updateTaskDto);
+        return this.taskService.update(req.user.id, updateTaskDto);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        console.log('Delete');
-        return this.taskService.remove(+id);
+    @Delete()
+    remove(@Body() id:number, @Request() req) {
+        return this.taskService.remove(id,req.user.id);
     }
     //-----------------------------------------------------02
 }
