@@ -28,8 +28,8 @@ export class CategoryService{
         return this.categoryRepository.find({ relations: ['db'] });
     }
 
-    findOne(id:number): Promise<User[]> {
-        return this.userRepository.find({id:id});
+    findOne(id:number): Promise<Category[]> {
+        return this.categoryRepository.find({id:id['id']});
         //Spesifik değere sahip verilerin hepsi için: find({ name: “jane” })
     }
 

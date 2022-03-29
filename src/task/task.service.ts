@@ -1,7 +1,7 @@
 import {Injectable, Request} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Task} from "./entities/task.entity";
-import {createQueryBuilder, Repository} from "typeorm";
+import {Repository} from "typeorm";
 import {CreateTaskDto} from "./dto/create-task.dto";
 import {UpdateTaskDto} from "./dto/update-task.dto";
 import {User} from "../user/entities/user.entity";
@@ -21,12 +21,6 @@ export class TaskService{
 
 
     create(createTaskDto: CreateTaskDto,@Request() req) {
-        const task=new Task();
-        task.tasking=createTaskDto.tasking;
-        task.user=req.user['id'];
-        task.ctgr=createTaskDto.ctgr;
-        return this.taskRepository.save(task)
-
         const createTask=this.taskRepository
             .createQueryBuilder()
             .insert()
