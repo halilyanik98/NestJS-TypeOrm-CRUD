@@ -12,8 +12,10 @@ export class Task {
   add
   @UpdateDateColumn()
   update
-  @CreateDateColumn()
-  endDate
+  @Column('date', { nullable: true })
+  endDate: Date;
+  @Column({ default: false })
+  isActive: boolean;
   @ManyToOne((type) => User, (user) => user.dbTask)
   user: User[]
 
