@@ -21,9 +21,9 @@ export class CategoryController{
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get()
-    find_One(@Request() req) {
-        return this.categoryService.findOne(req.user.id);
+    @Get('one')
+    find_One(@Body() id:number) {
+        return this.categoryService.findOne(id);
     }
 
 
