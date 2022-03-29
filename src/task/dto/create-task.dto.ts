@@ -10,4 +10,5 @@ export class CreateTaskDto {
     tasking: string;
     ctgr:[];
     user:number;
+    endDate:string;
 }
