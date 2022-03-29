@@ -1,11 +1,13 @@
 import {IsNotEmpty} from "class-validator";
 import {PrimaryGeneratedColumn} from "typeorm";
+
 //Model
 export class CreateTaskDto {
     //Use Pipe
     @PrimaryGeneratedColumn()
-    id:number;
+    id: number;
     @IsNotEmpty()
-    tasking:string;
-
+    tasking: string;
+    ctgr:[];
+    user:number;
 }

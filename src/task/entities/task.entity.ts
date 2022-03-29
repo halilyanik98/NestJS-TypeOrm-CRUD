@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn} from "typeorm"
 import { User } from "../../user/entities/user.entity"
+import {Category} from "../../category/entities/category.entity";
 
 @Entity()
 export class Task {
@@ -10,5 +11,15 @@ export class Task {
   tasking: string
 
   @ManyToOne((type) => User, (user) => user.dbTask)
-  userId: User[]
+  user: User[]
+
+  @ManyToOne((type) => Category, (category) => category.db)
+  ctgr: Category[]
+
+  @CreateDateColumn()
+  add
+  @UpdateDateColumn()
+  update
+
+
 }
