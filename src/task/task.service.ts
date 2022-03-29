@@ -26,7 +26,7 @@ export class TaskService{
             .insert()
             .into(Task)
             .values([
-                { tasking: createTaskDto.tasking, user: req.user['id'], ctgr: createTaskDto.ctgr },
+                { tasking: createTaskDto.tasking, user: req.user['id'], ctgr: createTaskDto.ctgr,endDate:createTaskDto.endDate },
             ])
             .execute()
     }
@@ -44,12 +44,21 @@ export class TaskService{
     }
     update(userId:number, updateTaskDto: UpdateTaskDto) {
 
-        const updateTask= this.taskRepository
-            .createQueryBuilder()
-            .update(Task)
-            .set({ tasking: updateTaskDto.tasking, ctgr: updateTaskDto.ctgr })
-            .where("id = :id AND userId = :userId", { id: updateTaskDto.id, userId:userId})
-            .execute()
+        if(updateTaskDto.endDate!==null){
+            const  updateTask= this.taskRepository.createQueryBuilder()
+                .update(Task)
+                .set({ tasking: updateTaskDto.tasking, ctgr: updateTaskDto.ctgr, endDate:updateTaskDto.endDate,isActive:true})
+                .where("id = :id AND userId = :userId", { id: updateTaskDto.id, userId:userId})
+                .execute()
+        }
+        else{
+            const updateTask2= this.taskRepository
+                .createQueryBuilder()
+                .update(Task)
+                .set({ tasking: updateTaskDto.tasking, ctgr: updateTaskDto.ctgr, endDate:updateTaskDto.endDate })
+                .where("id = :id AND userId = :userId", { id: updateTaskDto.id, userId:userId})
+                .execute()
+        }
 
     }
 
